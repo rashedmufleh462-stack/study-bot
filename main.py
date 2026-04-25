@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import os
 
-# سحب التوكن من Render (Environment Variables)
+# سحب التوكن من Render
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 # إعداد البوت
@@ -26,8 +26,12 @@ async def ping(ctx):
 async def setup_roles(ctx):
     await ctx.send("أهلاً بك! البوت جاهز لإعطاء الرتب.")
 
-# تشغيل البوت
+# تشغيل البوت مع كشف الأخطاء
 if TOKEN:
-    bot.run(TOKEN)
+    try:
+        bot.run(TOKEN)
+    except Exception as e:
+        print("❌ في خطأ أثناء تشغيل البوت:")
+        print(e)
 else:
-    print("❌ خطأ: تأكد أنك حاط DISCORD_TOKEN في Render")
+    print("❌ ما لقيت DISCORD_TOKEN! تأكد إنه موجود في Render")
