@@ -23,8 +23,7 @@ keep_alive()
 # ----------------------------------------------
 
 # التوكن تبعك
-import os
-TOKEN = os.environ.get('DISCORD_TOKEN')
+TOKEN = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
