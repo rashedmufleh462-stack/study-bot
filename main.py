@@ -23,7 +23,7 @@ keep_alive()
 # ----------------------------------------------
 
 # التوكن تبعك
-TOKEN = os.getenv('MTQ5NzYxMDgxNzQxNDM2NTIxNA.GKZ5We.zgkj-P0jACI_bEBVq8k7DjIax0-7z88bGcYNKA')
+TOKEN = os.getenv('MTQ5NzYxMDgxNzQxNDM2NTIxNA.G_aUhW.X8ARgdBycPb8dSwmgD9DX-f2QAteLPe2_XmVok')
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
