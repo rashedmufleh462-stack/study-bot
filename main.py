@@ -2,36 +2,36 @@ import discord
 from discord.ext import commands
 import os
 
-# سحب التوكن من Render
+# التوكن من Render Environment Variables
 TOKEN = os.getenv("DISCORD_TOKEN")
 
-# إعداد البوت
-intents = discord.Intents.all()
+# إعداد الـ intents بشكل آمن (أفضل من all)
+intents = discord.Intents.default()
+intents.message_content = True
+intents.members = True
+
+# إنشاء البوت
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-# لما البوت يشتغل
+# حدث تشغيل البوت
 @bot.event
 async def on_ready():
     print('---------------------------------')
-    print(f'تم تشغيل البوت بنجاح يا راشد: {bot.user}')
+    print(f'تم تشغيل البوت بنجاح: {bot.user}')
     print('---------------------------------')
 
-# أمر تجربة
+# أمر اختبار
 @bot.command()
 async def ping(ctx):
     await ctx.send('pong!')
 
-# أمر إعداد رتب (تجريبي)
+# أمر تجريبي
 @bot.command()
 async def setup_roles(ctx):
-    await ctx.send("أهلاً بك! البوت جاهز لإعطاء الرتب.")
+    await ctx.send("أهلاً! البوت شغال وجاهز 👍")
 
-# تشغيل البوت مع كشف الأخطاء
-if TOKEN:
-    try:
-        bot.run(TOKEN)
-    except Exception as e:
-        print("❌ في خطأ أثناء تشغيل البوت:")
-        print(e)
-else:
-    print("❌ ما لقيت DISCORD_TOKEN! تأكد إنه موجود في Render")
+# تشغيل البوت
+if not TOKEN:
+    raise ValueError("❌ DISCORD_TOKEN غير موجود في Render Environment Variables")
+
+bot.run(TOKEN)
